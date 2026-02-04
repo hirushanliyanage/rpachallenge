@@ -1,7 +1,5 @@
 import os
 import time
-
-import driver
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -11,7 +9,8 @@ class RPACHALLENGE:
     def __init__(self):
         os.makedirs("downloads", exist_ok=True)
         options = webdriver.ChromeOptions()
-        options.add_experimental_option("prefs", {"download.default_directory": "C:\\Users\\Hiru\\PycharmProjects\\PythonProject\\downloads"})
+        options.add_experimental_option("prefs", {
+            "download.default_directory": "C:\\Users\\Hiru\\PycharmProjects\\PythonProject\\downloads"})
         self.driver = webdriver.Chrome(options=options)
         self.driver.get("https://rpachallenge.com/")
         self.file_path = "downloads/challenge.xlsx"
@@ -23,7 +22,6 @@ class RPACHALLENGE:
         self.address = []
         self.email = []
         self.phone_number = []
-
 
     def download_file(self):
         if os.path.exists(self.file_path):
@@ -53,16 +51,18 @@ class RPACHALLENGE:
     def start(self):
         self.driver.find_element(By.CSS_SELECTOR, "button.uiColorButton").click()
 
-    def input_data(self,id):
-        self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelFirstName"]').send_keys(self.first_name[id])
-        self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelLastName"]').send_keys(self.last_name[id])
-        self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelCompanyName"]').send_keys(self.company_name[id])
+    def input_data(self, id):
+        self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelFirstName"]').send_keys(
+            self.first_name[id])
+        self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelLastName"]').send_keys(
+            self.last_name[id])
+        self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelCompanyName"]').send_keys(
+            self.company_name[id])
         self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelRole"]').send_keys(self.role_name[id])
         self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelAddress"]').send_keys(self.address[id])
         self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelEmail"]').send_keys(self.email[id])
-        self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelPhone"]').send_keys(self.phone_number[id])
-
-
+        self.driver.find_element(By.CSS_SELECTOR, 'input[ng-reflect-name="labelPhone"]').send_keys(
+            self.phone_number[id])
 
     def close(self):
         self.driver.quit()
